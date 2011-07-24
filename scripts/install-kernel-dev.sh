@@ -95,7 +95,6 @@ fi
 #clean object files
 rm -f $INSTALL_PATH/lib/modules/$KernelVer/build/scripts/*.o
 rm -f $INSTALL_PATH/lib/modules/$KernelVer/build/scripts/*/*.o
-#find $INSTALL_PATH/lib/modules/$KernelVer/build/scripts/ -type f -executable -exec rm -f {} \;
 # prune junk
 find $INSTALL_PATH/lib/modules/$KernelVer/build/ -name ".*.cmd" -o -name "modules.order" -exec rm -f {} \;
 
