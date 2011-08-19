@@ -1,0 +1,65 @@
+#!/bin/bash
+# chkconfig: 35 99 1
+# description: ActionCenter Daemon
+# processname: actiond 
+# pidfile: /var/run/actiond.pid
+
+#source function library
+. /etc/init.d/functions
+
+prog=actiond
+script_path="/usr/local/actioncenter/"
+pidfile=/var/run/$prog.pid
+
+start() {
+	echo -n "Starting $prog: "
+	cd $script_path
+	daemon $prog
+	RETVAL=$?
+	echo
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/$prog
+	return $RETVAL
+}
+
+stop() {
+	echo -n "Stoping $prog: "
+	killproc -p $pidfile $prog
+	RETVAL=$?
+	echo
+	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/$prog
+	return $RETVAL
+}
+
+reload(){
+	echo -n "Reloading $prog: "
+	killproc -p $pidfile $prog -HUP
+	RETVAL=$?
+	echo
+	return $RETVAL
+}
+
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	status)
+		status -p $pidfile $prog
+		;;
+	reload)
+		reload
+		;;
+	restart)
+		stop
+		start
+		;;
+	*)
+		echo "Usage: $prog {start|stop|status|reload|restart}"
+		exit 1
+		;;
+esac
+
+exit $?
+		

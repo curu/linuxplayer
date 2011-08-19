@@ -1,0 +1,55 @@
+@CHARSET "UTF-8";
+
+body				{ 
+font-family: Georgia, serif; 
+  }
+
+.login_bg {
+	background: url(../images/login-page-bg.jpg) top center no-repeat #c4c4c4; 
+color: #3a3a3a;
+}
+
+.record_table {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	margin: 10px;
+	text-align: left;
+	border-collapse: collapse;
+	border: 1px solid #69c;
+}
+
+.record_table th {
+	text-align: left;
+	padding: 5px;
+	font-weight: normal;
+	font-size: 14px;
+	color: #039;
+	border-bottom: 1px dashed #69c;
+}
+
+.record_table td {
+	padding: 5px;
+	color: #669;
+	border-left: 1px solid #69c;
+	border-collapse: collapse;
+}
+.record_table td.first-child {
+	font-style: bold;
+}
+.record_table tbody tr:hover td {
+	color: #339;
+	background: #d0dafd;
+}
+
+label.error {
+	font-style: italic;
+	color: red;
+}
+
+input.error {
+	border: 1px dotted red;
+}
+
+.text_guide {
+	padding: 5px;
+}
