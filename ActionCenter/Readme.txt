@@ -1,5 +1,5 @@
 ActionCenter
-let non-technical user take the action, set sys administrators from trivia
+let non-technical user take the action, set sys administrators free from trivia
 
 by Curu Wong, originally wrote for Pineapple Design Limited<http://www.pineapple.com.hk>
 
