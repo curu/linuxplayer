@@ -230,15 +230,16 @@ if(@opt_tables || $opt_all){
 			$cur_db = $1;
 
 			my $found = 0;
+			if($prev_table){
+				log_msg "End Table '$prev_table'";
+				print "-- End table '$prev_table'\n\n";
+				$in_table{$prev_table} = 0;
+				$prev_table = undef;
+				$end_cnt++;
+				$found = 1;
+			}
 			if($prev_db){
 				$found = 1;
-				if($prev_table){
-					log_msg "End Table '$prev_table'";
-					print "-- End table '$prev_table'\n\n";
-					$in_table{$prev_table} = 0;
-					$prev_table = undef;
-					$end_cnt++;
-				}
 				log_msg "End DB '$prev_db'";
 				$in_db{$prev_db} = 0;
 			}
@@ -255,10 +256,10 @@ if(@opt_tables || $opt_all){
 		$dump_header .= $_ if($in_header);
 
 		#locate table
-		if($cur_db && /$TBL_RE_CAP/){
+		if(/$TBL_RE_CAP/){
 			$in_header = 0;
 			$cur_table = $1;
-			$cur_table = $cur_db ? "$cur_db.$cur_table" : "$cur_table";
+			$cur_table = ($cur_db && exists $in_table{"$cur_db.$cur_table"}) ? "$cur_db.$cur_table" : "$cur_table";
 			my $found = 0;
 			if($prev_table){
 				$found++;
