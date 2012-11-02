@@ -1,5 +1,4 @@
 #!/usr/bin/python 
-# -*- encoding: gb2312 -*-
 #########################################################
 #Monitor windows file share disk usage, an example use of pywin32
 #Author : Curu Wong
@@ -16,7 +15,6 @@ from win32netcon import *
 #check for free space every checkInterval seconds
 checkInterval = 1800 
 #send alert when available free space is less than warnFree(GB)
-#(单位为GB)小于warnFree时发送告警信息
 monitor_config = [
 	{
 		'path' : r'\\filesvr1\share1',
