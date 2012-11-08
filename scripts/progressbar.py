@@ -9,7 +9,7 @@ import sys
 import time
 
 class ProcessBar:
-    def __init__(self, bar_width):
+    def __init__(self, bar_width=70):
 	    self.bar_width = bar_width
 
     def show_progress(self, progress):
@@ -19,9 +19,8 @@ class ProcessBar:
 	    sys.stdout.write(prog_format % (int(progress*100), prog_width *'='))
 	    sys.stdout.flush()
 
-bar = ProcessBar(30);
-
 if __name__ == "__main__":
+  bar = ProcessBar(30);
 	print "caculating, please wait..."
 	for i in range(100):
 	    progress = i / (100 - 1.0) 
