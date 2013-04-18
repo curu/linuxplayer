@@ -1,4 +1,11 @@
 #!/usr/bin/perl
+###################################################################
+#who_attach_shm.pl:  list shared memory keys and attaching program
+#
+#Author: 	Curu Wong
+#Date:   	2013-04-04
+#License: 	GPL v3
+###################################################################
 use strict;
 use warnings;
 
