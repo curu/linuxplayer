@@ -1,2 +1,2 @@
 all:
-	make chshm
+	cc -o chshm chshm.c	
