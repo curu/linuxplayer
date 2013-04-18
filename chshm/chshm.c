@@ -31,7 +31,7 @@
 #include <getopt.h>
 
 void print_usage(char *prog_name){
-		fprintf(stderr, "Usage: %s [Options] shmid \n", prog_name);
+		fprintf(stderr, "Usage: %s [Options] shmid ...\n", prog_name);
 		fprintf(stderr, "Options:\n");
 		fprintf(stderr, "    -u|--user <user name>	change owner to <user name>\n");
 		fprintf(stderr, "    -g|--group <group name> 	change group to <grou pname>\n");
@@ -145,12 +145,12 @@ int main(int argc, char *argv[])
 		print_usage(argv[0]);
 		exit(0);
 	}
-
-	shmid = strtoul(argv[optind], NULL, 10);
-	//printf("shmid: %d, uid:%d, gid:%d, mode:%o\n", shmid, uid, gid, mode);
-	
-	if (chshm(shmid, uid, gid, mode) == -1 ){
-		return 1;
+	while(optind < argc){
+		shmid = strtoul(argv[optind], NULL, 10);
+		if (chshm(shmid, uid, gid, mode) == -1 ){
+			exit(EXIT_FAILURE);
+		}
+		optind++;
 	}
 	return 0;
 }
