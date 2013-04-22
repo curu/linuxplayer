@@ -9,22 +9,25 @@
 use strict;
 use warnings;
 
+use File::Glob ':glob';
+
 our %process_of_shm = ();
 our %shm_of_process = ();
 
-#parse lsof to search for shm usage
-open(my $lsof, 'lsof -P -n|') or die "unable to run lsof";
-while(<$lsof>){
-	my @fields = split;
-	my $shm_key = $1 if $fields[-1] =~ m:^/SYSV(\S+):;
-	if($shm_key){
-		$shm_key = "0x$shm_key";
-		my $pid = $fields[1];
-		my $exec = readlink("/proc/$pid/exe");
-		push @{ $process_of_shm{$shm_key} }, $exec;
+#parse /prc/[pid]/maps for shm usage
+for my $proc_map (bsd_glob('/proc/[1-9]*/maps')){
+	my $pid = (split /\//, $proc_map )[2];
+	open(my $fh, "<", $proc_map) or die "unable to open '$proc_map':$!";
+	while(<$fh>){
+		my $shm_key = $1 if $_ =~ m:\s+/SYSV(\S+):;
+		if($shm_key){
+			$shm_key = "0x$shm_key";
+			my $exec = readlink("/proc/$pid/exe");
+			push @{ $process_of_shm{$shm_key} }, $exec;
+		}
 	}
+	close($fh);
 }
-close($lsof);
 
 print "#" x 80, "\n";
 print "shm attach process list, group by shm key\n";
