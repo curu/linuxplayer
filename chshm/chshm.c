@@ -34,7 +34,7 @@ void print_usage(char *prog_name){
 		fprintf(stderr, "Usage: %s [Options] shmid ...\n", prog_name);
 		fprintf(stderr, "Options:\n");
 		fprintf(stderr, "    -u|--user <user name>	change owner to <user name>\n");
-		fprintf(stderr, "    -g|--group <group name> 	change group to <grou pname>\n");
+		fprintf(stderr, "    -g|--group <group name> 	change group to <group name>\n");
 		fprintf(stderr, "    -m|--mode <mode>		change mode to <mode> in octal\n");
 		fprintf(stderr, "\neg:\n");
 		fprintf(stderr, "    %s -u nobody -m 0660 65535 \n", prog_name);
