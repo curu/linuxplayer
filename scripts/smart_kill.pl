@@ -49,7 +49,7 @@ for my $proc_exe (bsd_glob('/proc/[1-9]*/exe')){
 	my $pid = $1 if $proc_exe =~ /(\d+)/;
 	my $exe = readlink($proc_exe);
 	next unless $exe && $exe =~ /^\Q$exe_prefix\E/;
-	$exe =~ s/\s+.*$//; #remove trailing possible '(deleted)' string
+	$exe =~ s/ \(deleted\)$//; #remove trailing possible '(deleted)' string
 	my $exe_name = basename($exe);
 	next if $process_to_kill{$exe_name};
 
