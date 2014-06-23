@@ -2,8 +2,9 @@
 ##############################################################
 # kill program if its mtime is later than proces start time
 # 
-# Author: curuwang
+# Author: Curu Wong
 # Date:   2013-05-08
+# License: GPL v3
 # #############################################################
 use strict;
 use warnings;
