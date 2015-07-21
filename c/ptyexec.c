@@ -126,7 +126,6 @@ int pty_exec(int use_shell, char * const* argv){
 		 * so when pty is closed, no HUP will be sent to me
 		*/
 		close(master_fd);
-		dup2(slave_fd, 0);
 		dup2(slave_fd, 1);
 		dup2(slave_fd, 2);
 		if(use_shell){
@@ -165,7 +164,7 @@ int main(int argc, char **argv){
 				return 0;
 			case 'c':
 				use_shell = 1;
-				if(argc < 3){
+				if(argc < 3 || strlen(argv[2]) < 1){
 					print_usage(argv[0]);
 					return 1;
 				}
